@@ -16,14 +16,16 @@ cron.schedule(config.updateIntervalMinutes, async () => {
     try {
         console.log('Running store update check...');
         for (const channel of config.watchedChannels) {
-            const updatedItems = await checkStoreUpdates(channel);
+            const newItems = await checkStoreUpdates(channel);
 
-            if (updatedItems.length > 0) {
+            console.log(newItems);
+
+            /*if (updatedItems.length > 0) {
                 for (const recipient of config.emailRecipients) {
-                    console.log("notifying: ", recipient)
-                    await sendEmail('New items in Twitch store!', `New items: ${JSON.stringify(updatedItems)}`, recipient);
+                    console.log("notifying: ", recipient);
+                    await sendEmail(`New items in Twitch store for channel ${channel}!`, `New items: ${JSON.stringify(updatedItems)}`, recipient);
                 }
-            }
+            }*/
         }
     } catch (error) {
         console.error('Error during store update check:', error.message);
