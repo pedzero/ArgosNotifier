@@ -12,12 +12,12 @@ const emailConfig = {
 
 const transporter = nodemailer.createTransport(emailConfig);
 
-export async function sendEmail(subject, text, to) {
+export async function sendEmail(subject, html, to) {
     const mailOptions = {
         from: process.env.SENDER_EMAIL,
         to,
         subject,
-        text,
+        html,
     };
 
     try {
