@@ -1,15 +1,30 @@
 import { checkStoreUpdates } from './api/checkStoreUpdates.js';
 import { sendEmail } from './email/notify.js';
 import cron from 'node-cron';
+import fs from 'fs/promises';
 
-const twitchChannelId = '5cc799026e852d26fcf16717';
+let config;
+try {
+    const configFile = await fs.readFile('./config.json', 'utf-8');
+    config = JSON.parse(configFile);
+} catch (error) {
+    console.error('Error reading config file:', error.message);
+    process.exit(1);
+}
 
-cron.schedule('*/15 * * * * *', async () => {
+cron.schedule(config.updateIntervalMinutes, async () => {
     try {
         console.log('Running store update check...');
-        let updatedItems = await checkStoreUpdates(twitchChannelId);
+        for (const channel of config.watchedChannels) {
+            const updatedItems = await checkStoreUpdates(channel);
 
-        await sendEmail('New items in Twitch store!', `New items: ${JSON.stringify(updatedItems)}`, 'example@gmail.com');
+            if (updatedItems.length > 0) {
+                for (const recipient of config.emailRecipients) {
+                    console.log("notifying: ", recipient)
+                    await sendEmail('New items in Twitch store!', `New items: ${JSON.stringify(updatedItems)}`, recipient);
+                }
+            }
+        }
     } catch (error) {
         console.error('Error during store update check:', error.message);
     }

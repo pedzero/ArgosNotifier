@@ -3,7 +3,7 @@ import { config } from 'dotenv';
 
 config();
 const emailConfig = {
-    service: process.env.SERVICE,
+    service: process.env.EMAIL_SERVICE,
     auth: {
         user: process.env.SENDER_EMAIL,
         pass: process.env.SENDER_PASSWORD,
