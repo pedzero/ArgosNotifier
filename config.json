@@ -1,10 +1,10 @@
 {
-    "updateIntervalMinutes": "*/15 * * * * *",
+    "updateIntervalMinutes": "*/10 * * * *",
     "watchedChannels": [
         "5cc799026e852d26fcf16717"
     ],
     "emailRecipients": [
         "example1@gmail.com",
-        "example2@gamil.com"
+        "example2@gmail.com"
     ]
 }
