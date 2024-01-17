@@ -1,10 +1,10 @@
 {
-    "updateIntervalMinutes": "*/10 * * * *",
+    "updateInterval": "*/10 * * * *",
     "watchedChannels": [
-        "5cc799026e852d26fcf16717"
+        "id_of_the_channel_in_streamelements"
     ],
     "emailRecipients": [
-        "example1@gmail.com",
-        "example2@gmail.com"
+        "john.doe@example.com",
+        "jane.doe@example.com"
     ]
 }
