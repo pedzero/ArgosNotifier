@@ -11,12 +11,12 @@ A bot that notifies you when a specified Twitch channel updates its store in Str
 1. Clone the repository:
 
   ```bash
-  git clone https://github.com/your-username/argos-notifier.git
+  git clone https://github.com/pedzero/ArgosNotifier
   ```
    
 2. Install dependencies:
   ```bash
-  cd argos-notifier
+  cd ArgosNotifier
   npm install
   ```
 
