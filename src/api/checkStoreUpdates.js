@@ -50,7 +50,10 @@ function getNewItems(currentItems, previousHistory) {
             !previousHistory.find(
                 (previousItem) =>
                     previousItem._id === currentItem._id &&
-                    previousItem.updatedAt === currentItem.updatedAt
+                    (
+                        (previousItem.quantity.current === currentItem.quantity.current && previousItem.updatedAt === currentItem.updatedAt) ||
+                        (previousItem.quantity.current > currentItem.quantity.current)
+                    )
             )
         );
     });
