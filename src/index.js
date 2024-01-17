@@ -15,7 +15,9 @@ try {
     process.exit(1);
 }
 
-cron.schedule(config.updateIntervalMinutes, async () => {
+console.log('Notifier is running!');
+
+cron.schedule(config.updateInterval, async () => {
     try {
         let newItensFound = false;
         console.log('Running store update check...');
@@ -29,10 +31,10 @@ cron.schedule(config.updateIntervalMinutes, async () => {
                 const channelName = channelDetails.displayName;
                 const emailMessage = buildEmail(channelDetails, newItems);
 
-                console.log(`New items found in ${channelName} channel.`);
+                console.log(`New items found in ${channelName}'s channel.`);
                 for (const recipient of config.emailRecipients) {
                     console.log(`Notifying ${recipient}.`);
-                    await sendEmail(`New items in the ${channelName} Twitch store!`, emailMessage, recipient);
+                    await sendEmail(`New items in ${channelName}'s Twitch store!`, emailMessage, recipient);
                 }
                 console.log('Finishing...');
             }
